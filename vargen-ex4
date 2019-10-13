@@ -1,0 +1,68 @@
+
+##############################
+# General variable example 4:
+##############################
+#!/usr/local/bin/perl
+#/share/pkg/perl/5.24.0/install/bin/perl
+
+use strict;
+use warnings;
+use enum qw(MON TUE WED THU FRI); # this module is only available in SCC Perl
+use Data::Dumper qw(Dumper);
+
+my @WEEKDAY = (
+    'Monday',
+    'Tuesday', 
+    'Wednesday',
+    'Thursday',
+    'Friday',
+);
+
+sub max {
+    my $max = shift(@_);  # you may use '@ARG' if you add 'use English;' at the beginning of the script 
+    foreach my $foo (@_) {
+	$max = $foo if $max < $foo;
+    }
+    return $max;
+}
+
+my $bestday = max(MON, TUE, WED, THU, FRI);
+
+print "my best day is $WEEKDAY[$bestday]\n";
+
+# now test sort: 
+my @all = sort {$b <=> $a} 4, 19, 8, 3;
+
+print "\n\nresult after sort 4, 19, 8, 3:\n";
+print Dumper \@all;
+
+my @employees = (
+    {
+	id => 1, 
+	name => "Tommy Chan",
+    }, 
+    {
+	id => 2, 
+	name => "Sarah Lee",
+    }, 
+    {
+
+	id => 3, 
+	name => "George Washington",
+    }, 
+  
+);
+
+print "\n\nbefore sort: \n";
+print Dumper \@employees;
+
+my @ordered = sort {$a->{name} cmp $b->{name}} @employees;
+
+print "\n\nafter sort:\n ";
+print Dumper \@ordered;
+
+# print "here is the current \%ENV :\n";
+# print Dumper \%ENV;
+
+# print "here is the current \%INC :\n";
+# print Dumper \%INC;
